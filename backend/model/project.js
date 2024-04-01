@@ -16,9 +16,18 @@ function addproject (newProject){
     project.push( newProject );
 }
 
+function deleteproject (id){
+    const indexToDelete = project.findIndex(item => item.id===id);
+    if(indexToDelete === -1){
+        throw new Error('Project not found');
+    }
+    project.splice(indexToDelete , 1)
+}
+
 
 module.exports = {
     Getproject,
     getprojectbyuser ,
-    addproject
+    addproject,
+    deleteproject
 };

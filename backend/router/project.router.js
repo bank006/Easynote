@@ -44,4 +44,15 @@ router.get('/getproject/:idusers', verifyToken  ,(req, res)=>{
     }
 })
 
+router.delete('/deleteproject/:id',(req , res)=>{
+
+    try{
+        const id = parseInt(req.params.id)
+        project.deleteproject(id)
+        res.status(200).send('Project deleted succressfully')
+    }catch(error){
+        res.status(500).send(error)
+    }
+})
+
 module.exports = router;

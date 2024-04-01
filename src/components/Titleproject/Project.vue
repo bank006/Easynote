@@ -116,6 +116,18 @@ export default {
             router.push({ name: "Home", params: { idproject: idproject } })
         }
 
+        //deletrproject
+
+        const deleteproject=(id)=>{
+            console.log(id)
+            axios.delete(`http://localhost:3000/projects/deleteproject/${id}`)
+            .then((res)=>{
+                window.location.reload();
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+
         return {
             idUser,
             project,
@@ -129,7 +141,8 @@ export default {
             titleAddProject,
             descriptionAddProject,
             colorthemaddProject,
-            iduseraddProject
+            iduseraddProject,
+            deleteproject
         };
     }
 };
@@ -141,14 +154,20 @@ export default {
             <div class="topcard-project" v-if="project.length > 0">
                 <div class="item-card-project" v-for=" item in project " :key="item.id">
                     <div class="all-incard">
-                        <div :style="{ color: item.colorthem, backgroundColor: item.colorthem }" class="color">o</div>
+                        <div :style="{ color: item.colorthem, backgroundColor: item.colorthem }" class="color">
+                            <div style="display: flex; align-items: center; justify-content: end; padding-right: 20px;height: 100%;">
+                                <img @click="deleteproject(item.id)"  width="20" height="20" src="/delete.svg" alt="">
+                            </div>
+                        </div>
                         <h2>{{ item.title }}</h2>
                         <p>{{ item.description }}</p>
                         <div class="detailcard">
                             <div class="item-datailcard">
                                 <button @click="getlistcard(item.id)">เข้า</button>
                             </div>
+
                         </div>
+
 
                     </div>
                 </div>
